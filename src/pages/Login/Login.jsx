@@ -2,21 +2,37 @@ import { Link } from "react-router-dom";
 import Navbar from "../Shared/Navbar/Navbar";
 import { FcGoogle } from "react-icons/fc";
 import { FaTwitter, FaGithub } from "react-icons/fa";
+import { useContext } from "react";
+import { AuthContext } from "../../provider/AuthProvider";
+import Result from "postcss/lib/result";
 
 
 
 const Login = () => {
 
+    const { loginUser } = useContext(AuthContext)
+
     const handleLogin = e => {
         e.preventDefault()
         const form = new FormData(e.currentTarget)
-        console.log(form.get('password'))
+        const email = form.get('email')
+        const password = form.get('password')
+        console.log(email, password)
+
+        // login user
+        loginUser(email, password)
+            .then(result => {
+                console.log(result.user)
+            })
+            .catch(error => {
+                console.error(error)
+            })
     }
 
     return (
         <div>
             <Navbar></Navbar>
-            <div className="w-full max-w-md mx-auto p-8 space-y-3 rounded-xl  text-black">
+            <div className="w-full max-w-md mx-auto px-8 space-y-3 rounded-xl  text-black">
                 <h1 className="text-2xl font-bold text-center mb-5">Please Login</h1>
                 <form onSubmit={handleLogin} className="space-y-6">
                     <div className="space-y-1 text-sm">
@@ -30,7 +46,7 @@ const Login = () => {
                             <a rel="noopener noreferrer" href="#">Forgot Password?</a>
                         </div>
                     </div>
-                    <button className="block w-full p-3 text-center font-bold rounded-lg text-gray-900 bg-violet-400">Login</button>
+                    <button className="block w-full p-3 text-center font-semibold rounded-lg text-white bg-[#403F3F]">Login</button>
                 </form>
                 <div className="flex items-center pt-4 space-x-1">
                     <div className="flex-1 h-px sm:w-16 bg-gray-700"></div>
