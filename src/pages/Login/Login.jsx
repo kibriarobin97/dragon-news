@@ -4,8 +4,6 @@ import { FcGoogle } from "react-icons/fc";
 import { FaTwitter, FaGithub } from "react-icons/fa";
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
-import Result from "postcss/lib/result";
-
 
 
 const Login = () => {
